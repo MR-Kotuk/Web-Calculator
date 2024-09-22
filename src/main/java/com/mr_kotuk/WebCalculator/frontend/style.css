@@ -1,0 +1,150 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1e1e1e, #2b2b2b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+    flex-direction: column;
+}
+
+h1 {
+    color: #ff9500;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.calculator {
+    background-color: #222;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 340px;
+    max-width: 100%;
+}
+
+input, button {
+    font-size: 18px;
+    padding: 12px;
+    margin: 10px 0;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+input {
+    background-color: #2a2a2a;
+}
+
+input:focus {
+    outline: none;
+    background-color: #333;
+    box-shadow: 0 0 8px #ff9500;
+}
+
+button {
+    background-color: #ff9500;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffb84d;
+}
+
+button:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.operators {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.operator-btn {
+    width: 23%;
+    background-color: #444;
+    font-size: 22px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.operator-btn:hover {
+    background-color: #ff9500;
+    transform: scale(1.05);
+}
+
+.operator-btn.selected {
+    background-color: #ff9500;
+    transform: scale(1.1);
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #333;
+    border-radius: 8px;
+    transition: opacity 0.3s ease, transform 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.result.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid #ff9500;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    display: none;
+    margin: 10px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.github-link {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #333;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+}
+
+.github-link:hover {
+    background-color: #ff9500;
+    transform: scale(1.05);
+}
+
+.github-link:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+    .calculator {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR_Kotuk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculator</h1>
+
+        <input type="number" id="firstNumber" placeholder="Enter first number" />
+        <input type="number" id="secondNumber" placeholder="Enter second number" />
+
+        <div class="operators">
+            <button class="operator-btn" data-operator="+">+</button>
+            <button class="operator-btn" data-operator="-">−</button>
+            <button class="operator-btn" data-operator="*">×</button>
+            <button class="operator-btn" data-operator="/">÷</button>
+        </div>
+
+        <button onclick="calculate()">=</button>
+
+        <div class="spinner" id="spinner"></div>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <a class="github-link" href="https://github.com/MR-Kotuk" target="_blank">
+        MR_Kotuk
+    </a>
+
+    <script>
+        let selectedOperator = null;
+
+        const operatorButtons = document.querySelectorAll('.operator-btn');
+        operatorButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                operatorButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+                selectedOperator = button.getAttribute('data-operator');
+            });
+        });
+
+        function calculate() {
+            const firstNumber = document.getElementById("firstNumber").value;
+            const secondNumber = document.getElementById("secondNumber").value;
+            const resultElement = document.getElementById("result");
+            const spinner = document.getElementById("spinner");
+
+            resultElement.textContent = "";
+            resultElement.classList.remove("show");
+
+            if (!firstNumber || !secondNumber || !selectedOperator) {
+                resultElement.textContent = "Please enter both numbers and choose an operator.";
+                resultElement.classList.add("show");
+                return;
+            }
+
+            spinner.style.display = "block";
+
+            fetch('http://localhost:8080/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstNumber: parseFloat(firstNumber),
+                    secondNumber: parseFloat(secondNumber),
+                    operator: selectedOperator
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                spinner.style.display = "none";
+
+                resultElement.textContent = "Result: " + result;
+                resultElement.classList.add("show");
+            })
+            .catch(error => {
+                spinner.style.display = "none";
+
+                resultElement.textContent = "Error occurred";
+                resultElement.classList.add("show");
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
