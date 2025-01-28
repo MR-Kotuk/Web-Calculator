@@ -9,22 +9,16 @@ public class CalculatorService {
     public double calculate(Calculate calculate) {
         double firstNumber = calculate.getFirstNumber();
         double secondNumber = calculate.getSecondNumber();
-        String operator = calculate.getOperator();
+        double result = 0;
 
-        switch (operator) {
-            case "+":
-                return firstNumber + secondNumber;
-            case "-":
-                return firstNumber - secondNumber;
-            case "*":
-                return firstNumber * secondNumber;
-            case "/":
-                if (secondNumber == 0)
-                    return 0;
-
-                return firstNumber / secondNumber;
-            default:
-                throw new IllegalArgumentException("Invalid operator");
+        switch (calculate.getOperator()) {
+            case "+" -> result = firstNumber + secondNumber;
+            case "-" -> result = firstNumber - secondNumber;
+            case "*" -> result = firstNumber * secondNumber;
+            case "/" -> result = secondNumber == 0 ? -1 : firstNumber / secondNumber;
+            default -> throw new IllegalArgumentException("Invalid operator");
         }
+
+        return result;
     }
 }
